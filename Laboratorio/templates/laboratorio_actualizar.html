@@ -1,0 +1,7 @@
+<!-- laboratorio_actualizar.html -->
+<h1>Actualizar Laboratorio</h1>
+<form method="POST" action="{% url 'laboratorio_actualizar' laboratorio.id %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar Cambios</button>
+</form>

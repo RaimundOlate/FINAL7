@@ -1,0 +1,11 @@
+<!-- laboratorio_detalle.html -->
+<h1>Detalles del Laboratorio</h1>
+<p><strong>Nombre:</strong> {{ laboratorio.nombre }}</p>
+<p><strong>Ciudad:</strong> {{ laboratorio.ciudad }}</p>
+<p><strong>País:</strong> {{ laboratorio.pais }}</p>
+
+<a href="{% url 'laboratorio_actualizar' laboratorio.id %}">Actualizar Laboratorio</a>
+<form action="{% url 'laboratorio_borrar' laboratorio.id %}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este laboratorio?')">
+  {% csrf_token %}
+  <button type="submit">Eliminar Laboratorio</button>
+</form>

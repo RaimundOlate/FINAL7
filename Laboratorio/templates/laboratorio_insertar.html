@@ -1,0 +1,7 @@
+<!-- laboratorio_insertar.html -->
+<h1>Crear Laboratorio</h1>
+<form method="POST" action="{% url 'laboratorio_insertar' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar</button>
+</form>

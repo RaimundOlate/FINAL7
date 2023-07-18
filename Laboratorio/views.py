@@ -1,3 +1,44 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Laboratorio
+from .forms import LaboratorioForm
 
-# Create your views here.
+
+def laboratorio_lista(request):
+    laboratorios = Laboratorio.objects.all()
+    return render(request, 'laboratorio_lista.html', {'laboratorios': laboratorios})
+
+
+def laboratorio_detalle(request, laboratorio_id):
+    laboratorio = get_object_or_404(Laboratorio, id=laboratorio_id)
+    return render(request, 'laboratorio_detalle.html', {'laboratorio': laboratorio})
+
+
+def laboratorio_insertar(request):
+    if request.method == 'POST':
+        form = LaboratorioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('laboratorio_list')
+    else:
+        form = LaboratorioForm()
+    return render(request, 'laboratorio_insertar.html', {'form': form})
+
+
+def laboratorio_actualizar(request, laboratorio_id):
+    laboratorio = get_object_or_404(Laboratorio, id=laboratorio_id)
+    if request.method == 'POST':
+        form = LaboratorioForm(request.POST, instance=laboratorio)
+        if form.is_valid():
+            form.save()
+            return redirect('laboratorio_lista')
+    else:
+        form = LaboratorioForm(instance=laboratorio)
+    return render(request, 'laboratorio_actualizar.html', {'form': form, 'laboratorio': laboratorio})
+
+
+def laboratorio_borrar(request, laboratorio_id):
+    laboratorio = get_object_or_404(Laboratorio, id=laboratorio_id)
+    if request.method == 'POST':
+        laboratorio.delete()
+        return redirect('laboratorio_lista')
+    return render(request, 'laboratorio_borrar.html', {'laboratorio': laboratorio})

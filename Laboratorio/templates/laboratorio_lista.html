@@ -1,0 +1,13 @@
+<!-- laboratorio_lista.html -->
+<h1>Lista de Laboratorios</h1>
+<a href="{% url 'laboratorio_insertar' %}">Crear Laboratorio</a>
+
+<ul>
+  {% for laboratorio in laboratorios %}
+    <li>
+      <a href="{% url 'laboratorio_detalle' laboratorio.id %}">{{ laboratorio.nombre }}</a>
+    </li>
+  {% empty %}
+    <li>No hay laboratorios.</li>
+  {% endfor %}
+</ul>
