@@ -24,6 +24,7 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'laboratorio',
                     'f_fabricacion', 'p_costo', 'p_venta')
     ordering = ['nombre', 'laboratorio']
+    list_filter = ('nombre', 'laboratorio')
 
     class Meta:
         verbose_name = 'Producto'
