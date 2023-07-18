@@ -1,0 +1,62 @@
+
+Obtenga todos los objetos tanto Laboratorio, DirectorGeneral y Productos.
+
+Importacion de modelos:
+from Laboratorio.models import Laboratorio, DirectorGeneral, Producto
+
+
+asignacion de modelos a variables:
+laboratorios = Laboratorio.objects.all()
+directores_generales = DirectorGeneral.objects.all()
+productos = Producto.objects.all()
+
+mostrar modelos:
+print(laboratorios)
+print(directores_generales)
+print(productos)
+
+
+
+---------------------------------------------------
+Obtenga el laboratorio del Producto cuyo nombre es ‘Producto 1’.
+
+Importacion de modelos:
+from Laboratorio.models import Laboratorio, DirectorGeneral, Producto
+
+
+creacion de variable:
+producto = Producto.objects.get(nombre='Producto 1')
+laboratorio = producto.laboratorio
+
+mostrar:
+print(laboratorio.nombre)
+
+
+----------------------------------------------------
+Ordene todos los productos por nombre, y que muestre los valores de nombre y 
+laboratorio.
+
+Importacion de modelos:
+from Laboratorio.models import Laboratorio, DirectorGeneral, Producto
+
+creacion de variable:
+productos = Producto.objects.order_by('nombre')
+
+mostrar:
+for producto in productos:
+    print('Nombre:', producto.nombre)
+    print('Laboratorio:', producto.laboratorio.nombre)
+
+
+-----------------------------------------------------
+Realice una consulta que imprima por pantalla los laboratorios de todos los productos. 
+
+Importacion de modelos:
+from Laboratorio.models import Laboratorio, DirectorGeneral, Producto
+
+creacion de variable:
+laboratorios = Producto.objects.values_list('laboratorio__nombre', flat=True).distinct()
+
+mostrar:
+for laboratorio in laboratorios:
+    print(laboratorio)
